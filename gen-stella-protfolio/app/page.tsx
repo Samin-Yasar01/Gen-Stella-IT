@@ -1,99 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import HeroAnimation from '@/components/sections/heroanimation'
 import { motion } from 'framer-motion'
+import AppShell from '@/components/layout/AppShell'
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isDark, setIsDark] = useState(false)
-
   const router = useRouter()
 
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [isDark])
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'dark') {
-      setIsDark(true)
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('theme', isDark ? 'dark' : 'light')
-  }, [isDark])
-
-
-
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
-      {/* Header/Navigation */}
-      <header className="border-b border-gray-200 dark:border-slate-800">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div>
-              <img src="/logo/GenStellaIT.jpeg" alt="Gen Stella IT Logo" className="h-14 w-14 rounded-md" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-400 dark:bg-gradient-to-r dark:from-blue-500 dark:to-purple-400 text-transparent bg-clip-text tracking-wide">
-                Gen Stella IT
-              </h1>
-            </div>
-          </div>
-
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-8 items-center">
-            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</Link>
-            <Link href="/services" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</Link>
-            <Link href="/portfolio" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Portfolio</Link>
-            <Link href="/team" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Team</Link>
-            <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</Link>
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300"
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300"
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2">
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </nav>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 p-4">
-            <div className="flex flex-col gap-4">
-              <Link href="/about" className="text-gray-700 dark:text-gray-300">About</Link>
-              <Link href="/services" className="text-gray-700 dark:text-gray-300">Services</Link>
-              <Link href="/portfolio" className="text-gray-700 dark:text-gray-300">Portfolio</Link>
-              <Link href="/team" className="text-gray-700 dark:text-gray-300">Team</Link>
-              <Link href="/contact" className="text-gray-700 dark:text-gray-300">Contact</Link>
-            </div>
-          </div>
-        )}
-      </header>
-
+    <AppShell>
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[80vh] flex items-center">
         {/* THE ANIMATION BACKGROUND */}
@@ -103,16 +19,25 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="bg-white/10 dark:bg-transparent backdrop-blur-sm md:backdrop-blur-none p-6 rounded-2xl">
               <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-                Build Amazing <span className="bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text">Digital Products</span>
+                Build Amazing{' '}
+                <span className="bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text">
+                  Digital Products
+                </span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
                 We create innovative software solutions that transform businesses and delight users.
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all hover:scale-105" onClick={() => router.push('/portfolio')}>
+                <button
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all hover:scale-105"
+                  onClick={() => router.push('/portfolio')}
+                >
                   Get Started
                 </button>
-                <button className="border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-slate-800 transition-all" onClick={() => router.push('/about')}>
+                <button
+                  className="border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-slate-800 transition-all"
+                  onClick={() => router.push('/about')}
+                >
                   Learn More
                 </button>
               </div>
@@ -122,12 +47,12 @@ export default function Home() {
               <motion.div
                 animate={{
                   y: [0, -20, 0],
-                  rotateZ: [0, 1, 0]
+                  rotateZ: [0, 1, 0],
                 }}
                 transition={{
                   duration: 6,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: 'easeInOut',
                 }}
                 className="relative w-80 h-96"
               >
@@ -136,7 +61,6 @@ export default function Home() {
 
                 {/* The Main "Glass" Card */}
                 <div className="relative h-full w-full bg-white/5 dark:bg-slate-900/40 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 rounded-3xl p-6 shadow-2xl overflow-hidden group">
-
                   {/* Decorative "Inner Orbit" */}
                   <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl group-hover:bg-blue-500/40 transition-colors duration-500" />
 
@@ -159,12 +83,12 @@ export default function Home() {
                         {/* Spinning Rings */}
                         <motion.div
                           animate={{ rotate: 360 }}
-                          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
                           className="w-32 h-32 border-2 border-dashed border-blue-400/30 rounded-full flex items-center justify-center"
                         />
                         <motion.div
                           animate={{ rotate: -360 }}
-                          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
                           className="absolute inset-0 border border-purple-500/20 rounded-full scale-110"
                         />
                         {/* Center "Star" */}
@@ -195,6 +119,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* About Section */}
       <section id="about" className="bg-gray-50 dark:bg-slate-900 py-24 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -210,12 +135,24 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: 'Our Mission', desc: 'We empower businesses with cutting-edge technology solutions that drive growth and innovation.', icon: '🚀' },
-              { title: 'Our Vision', desc: 'To be the leading software company that shapes the future of digital transformation.', icon: '✨' },
-              { title: 'Our Values', desc: 'Innovation, integrity, and customer success drive everything we do.', icon: '💎' },
+              {
+                title: 'Our Mission',
+                desc: 'We empower businesses with cutting-edge technology solutions that drive growth and innovation.',
+                icon: '🚀',
+              },
+              {
+                title: 'Our Vision',
+                desc: 'To be the leading software company that shapes the future of digital transformation.',
+                icon: '✨',
+              },
+              {
+                title: 'Our Values',
+                desc: 'Innovation, integrity, and customer success drive everything we do.',
+                icon: '💎',
+              },
             ].map((item, i) => (
               <motion.div
-                key={i}
+                key={item.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -227,9 +164,7 @@ export default function Home() {
                 <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-blue-500 transition-colors">
                   {item.title}
                 </h4>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {item.desc}
-                </p>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -248,18 +183,26 @@ export default function Home() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {[
-            { title: 'Web Development', desc: 'Custom web applications built with modern technologies like React, Next.js, and Node.' },
-            { title: 'Mobile Apps', desc: 'Native-feel iOS and Android applications that provide seamless user experiences.' },
-            { title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure, DevOps automation, and secure hosting deployment.' },
+            {
+              title: 'Web Development',
+              desc: 'Custom web applications built with modern technologies like React, Next.js, and Node.',
+            },
+            {
+              title: 'Mobile Apps',
+              desc: 'Native-feel iOS and Android applications that provide seamless user experiences.',
+            },
+            {
+              title: 'Cloud Solutions',
+              desc: 'Scalable cloud infrastructure, DevOps automation, and secure hosting deployment.',
+            },
           ].map((service, i) => (
             <motion.div
-              key={i}
+              key={service.title}
               whileHover={{ scale: 1.03 }}
               className="relative p-[1px] rounded-2xl overflow-hidden group bg-gray-200 dark:bg-slate-700 hover:bg-gradient-to-br hover:from-blue-500 hover:to-purple-500 transition-all duration-500"
             >
               <div className="bg-white dark:bg-slate-900 p-8 rounded-[15px] h-full transition-colors group-hover:bg-white/95 dark:group-hover:bg-slate-900/90">
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-6 text-blue-600 dark:text-blue-400">
-                  {/* You can swap these with Lucide icons */}
                   <div className="font-bold text-xl">{i + 1}</div>
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{service.title}</h4>
@@ -293,55 +236,14 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-blue-600 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] px-10 py-4 rounded-xl font-bold text-lg transition-all"
+              onClick={() => router.push('/contact')}
             >
               Get in Touch
             </motion.button>
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 dark:bg-slate-950 text-gray-400 py-12 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li><Link href="#" className="hover:text-white transition-colors">About</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Blog</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Careers</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Services</h4>
-              <ul className="space-y-2">
-                <li><Link href="#" className="hover:text-white transition-colors">Web Dev</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Mobile Apps</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Cloud</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2">
-                <li><Link href="#" className="hover:text-white transition-colors">Documentation</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Support</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2">
-                <li><Link href="#" className="hover:text-white transition-colors">Privacy</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Terms</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Cookies</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p>&copy; 2024 TechCorp. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </AppShell>
   )
 }
+
