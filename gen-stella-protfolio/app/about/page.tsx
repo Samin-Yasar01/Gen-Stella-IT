@@ -91,11 +91,6 @@ export default function AboutPage() {
                 your product runs smoothly and grows with your needs.
               </p>
 
-              <p className="text-sm text-gray-500 mt-4">
-                Official registration is pending; we are operating and taking on projects now and will complete formal
-                registration in due course.
-              </p>
-
               <div className="mt-10 grid sm:grid-cols-3 gap-6">
                 {highlights.map((item) => (
                   <motion.div
