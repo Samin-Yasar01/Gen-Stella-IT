@@ -2,19 +2,26 @@
 
 import { motion } from 'framer-motion'
 import AppShell from '@/components/layout/AppShell'
+import Link from 'next/link'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { teamMembers } from '@/data/team'
+import { testimonials } from '@/data/testimonials'
+import { TeamSection } from '@/components/sections/team'
+import { TestimonialsSection } from '@/components/sections/testimonials'
 
 const highlights = [
   {
     title: 'Product-focused engineering',
-    description: 'We blend strategy, design, and engineering to build software that actually moves business metrics.',
+    description: 'We blend strategy, design, and engineering to build web applications and websites that move business outcomes.',
   },
   {
     title: 'AI-native delivery',
-    description: 'From copilots to automation, we help teams infuse AI into existing workflows and products.',
+    description: 'From copilots to automation, we help teams add practical AI features and automation where it matters.',
   },
   {
     title: 'Long-term partnerships',
-    description: 'Most of our clients work with us across multiple products and years of roadmap.',
+    description: 'We focus on friendly, long-term partnerships — we stay involved after delivery to ensure long-term success.',
   },
 ]
 
@@ -24,12 +31,14 @@ const milestones = [
   { year: '2024', label: 'Launched AI transformation programs with key partners.' },
 ]
 
-const teamMembers = [
-  { name: 'Member 1', role: 'Frontend Engineer', image: '/logo/member-1.jpg', bio: 'Frontend engineer — builds responsive interfaces and delivers polished UX.' },
-  { name: 'Member 2', role: 'Backend Engineer', image: '/logo/member-2.jpg', bio: 'Backend engineer — designs APIs, microservices, and scalable systems.' },
-  { name: 'Member 3', role: 'Product Designer', image: '/logo/member-3.jpg', bio: 'Product designer — crafts user flows, visuals, and branded experiences.' },
-  { name: 'Member 4', role: 'DevOps Engineer', image: '/logo/member-4.jpg', bio: 'DevOps engineer — automates deployment, monitoring, and cloud infrastructure.' },
+const processSteps = [
+  { label: '01 · Discover', description: 'Clarify goals, constraints and success metrics.' },
+  { label: '02 · Design', description: 'Define flows, prototypes and acceptance criteria.' },
+  { label: '03 · Build', description: 'Ship iteratively with production-quality code.' },
+  { label: '04 · Evolve', description: 'Measure, iterate and scale post-launch.' },
 ]
+
+// teamMembers now sourced from `data/team.ts` — migrate and maintain a single source of truth
 
 export default function AboutPage() {
   return (
@@ -58,21 +67,33 @@ export default function AboutPage() {
                 </span>
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
-                Gen Stella IT is a software services studio focused on building full‑stack web applications and websites.
+                Gen Stella IT is a friendly software services studio specializing in full‑stack web applications and websites.
                 We design, build, and scale custom products — from marketing sites to complex internal platforms — using
-                Next.js, NestJS, Express, React, and Node. We prioritize fast, reliable delivery and products that solve real
-                user problems.
+                Next.js, NestJS, Express, React, and Node. We prioritize clear communication, dependable delivery, and
+                solutions that solve real user problems.
               </p>
 
               <p className="text-base text-gray-600 dark:text-gray-400 mb-6">
-                Our process starts with listening: we gather requirements and learn your goals and constraints. We convert
-                that insight into an approved plan, then build iteratively with clear milestones. Pricing is typically
-                fixed; if scope changes (more features or full code transfer) the price may be adjusted accordingly.
+                Our process begins by listening closely: we learn what you want and why it matters. From that understanding
+                we craft an approved plan with clear milestones and deliverables. We build iteratively, keeping you involved
+                so the product evolves with real feedback.
+              </p>
+
+              <p className="text-base text-gray-600 dark:text-gray-400 mb-6">
+                Pricing is usually fixed for the agreed scope. If the scope changes — for example, new features, a larger
+                code handoff, or additional integrations — the price may be adjusted accordingly. We’ll always discuss
+                changes before proceeding.
               </p>
 
               <p className="text-base text-gray-600 dark:text-gray-400">
-                We are a friendly, tightly‑connected squad that values long‑term partnerships — we stay involved even
-                after delivery to ensure your product runs smoothly and scales as your needs grow.
+                We operate as a close-knit squad and prefer to keep our team size private for now. What matters is that we’re
+                friendly, responsive, and committed to long-term relationships: we stay available after delivery to ensure
+                your product runs smoothly and grows with your needs.
+              </p>
+
+              <p className="text-sm text-gray-500 mt-4">
+                Official registration is pending; we are operating and taking on projects now and will complete formal
+                registration in due course.
               </p>
 
               <div className="mt-10 grid sm:grid-cols-3 gap-6">
@@ -127,15 +148,15 @@ export default function AboutPage() {
 
                 <div className="mt-6 grid grid-cols-3 gap-3 text-center text-xs text-slate-300">
                   <div className="rounded-xl bg-white/5 border border-white/10 py-3">
-                    <p className="text-lg font-semibold text-white">20+</p>
+                    <p className="text-lg font-semibold text-white">—</p>
                     <p>Products shipped</p>
                   </div>
                   <div className="rounded-xl bg-white/5 border border-white/10 py-3">
-                    <p className="text-lg font-semibold text-white">5+</p>
+                    <p className="text-lg font-semibold text-white">—</p>
                     <p>Countries</p>
                   </div>
                   <div className="rounded-xl bg-white/5 border border-white/10 py-3">
-                    <p className="text-lg font-semibold text-white">98%</p>
+                    <p className="text-lg font-semibold text-white">—</p>
                     <p>Client retention</p>
                   </div>
                 </div>
@@ -165,6 +186,81 @@ export default function AboutPage() {
               </div>
             </div>
           </motion.div>
+
+          {/* Team */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-16"
+          >
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Meet the team</h2>
+            <TeamSection members={teamMembers} />
+          </motion.div>
+
+          {/* Testimonials */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-16"
+          >
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">What our clients say</h2>
+            <TestimonialsSection items={testimonials} />
+          </motion.div>
+
+          {/* FAQ */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-12"
+          >
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Frequently asked</h2>
+            <div className="max-w-2xl">
+              <Accordion type="single" collapsible>
+                <AccordionItem value="pricing">
+                  <AccordionTrigger>How do you price engagements?</AccordionTrigger>
+                  <AccordionContent>Usually fixed-price per agreed scope; changes are discussed before proceeding.</AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="tech">
+                  <AccordionTrigger>What technologies do you use?</AccordionTrigger>
+                  <AccordionContent>Next.js, React, Node, NestJS/Express, cloud infra — we pick the best tool for the job.</AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="support">
+                  <AccordionTrigger>Do you provide post-launch support?</AccordionTrigger>
+                  <AccordionContent>Yes — we offer handoff support, maintenance, and iterative improvements.</AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </motion.div>
+
+          {/* Contact CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-16"
+          >
+            <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-purple-500 p-8 text-white">
+              <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h3 className="text-xl font-semibold">Ready to Start Your Project?</h3>
+                  <p className="text-sm opacity-90 mt-1">Tell us about scope, timeline, and goals — we’ll respond within one business day.</p>
+                </div>
+                <div>
+                  <a href="/contact" className="inline-flex items-center rounded-lg bg-white/10 hover:bg-white/20 px-5 py-2 text-sm font-semibold transition">
+                    Get in Touch
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </section>
     </AppShell>

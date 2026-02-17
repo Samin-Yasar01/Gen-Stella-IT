@@ -4,32 +4,7 @@ import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import AppShell from '@/components/layout/AppShell'
 
-const teamMembers = [
-  {
-    name: 'Alex Rivera',
-    role: 'Founder · Product Engineering',
-    image:
-      'https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80',
-  },
-  {
-    name: 'Maya Chen',
-    role: 'Design Lead · Experience',
-    image:
-      'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80',
-  },
-  {
-    name: 'Daniel Ibrahim',
-    role: 'Cloud & DevOps',
-    image:
-      'https://images.pexels.com/photos/1181400/pexels-photo-1181400.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80',
-  },
-  {
-    name: 'Sara López',
-    role: 'AI & Data',
-    image:
-      'https://images.pexels.com/photos/1181532/pexels-photo-1181532.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80',
-  },
-]
+import { teamMembers } from '@/data/team'
 
 export default function TeamPage() {
   return (
