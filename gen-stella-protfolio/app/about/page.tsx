@@ -24,6 +24,13 @@ const milestones = [
   { year: '2024', label: 'Launched AI transformation programs with key partners.' },
 ]
 
+const teamMembers = [
+  { name: 'Member 1', role: 'Frontend Engineer', image: '/logo/member-1.jpg', bio: 'Frontend engineer — builds responsive interfaces and delivers polished UX.' },
+  { name: 'Member 2', role: 'Backend Engineer', image: '/logo/member-2.jpg', bio: 'Backend engineer — designs APIs, microservices, and scalable systems.' },
+  { name: 'Member 3', role: 'Product Designer', image: '/logo/member-3.jpg', bio: 'Product designer — crafts user flows, visuals, and branded experiences.' },
+  { name: 'Member 4', role: 'DevOps Engineer', image: '/logo/member-4.jpg', bio: 'DevOps engineer — automates deployment, monitoring, and cloud infrastructure.' },
+]
+
 export default function AboutPage() {
   return (
     <AppShell>
@@ -51,13 +58,21 @@ export default function AboutPage() {
                 </span>
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
-                We help teams design, build, and scale software products—from polished marketing websites to complex
-                internal platforms. Our focus is always the same: ship fast, ship with quality, and ship what your users
-                actually need.
+                Gen Stella IT is a software services studio focused on building full‑stack web applications and websites.
+                We design, build, and scale custom products — from marketing sites to complex internal platforms — using
+                Next.js, NestJS, Express, React, and Node. We prioritize fast, reliable delivery and products that solve real
+                user problems.
               </p>
+
+              <p className="text-base text-gray-600 dark:text-gray-400 mb-6">
+                Our process starts with listening: we gather requirements and learn your goals and constraints. We convert
+                that insight into an approved plan, then build iteratively with clear milestones. Pricing is typically
+                fixed; if scope changes (more features or full code transfer) the price may be adjusted accordingly.
+              </p>
+
               <p className="text-base text-gray-600 dark:text-gray-400">
-                This page is fully modular. Swap the text, rename sections, or plug in your own stats and logos without
-                touching layout or animation code.
+                We are a friendly, tightly‑connected squad that values long‑term partnerships — we stay involved even
+                after delivery to ensure your product runs smoothly and scales as your needs grow.
               </p>
 
               <div className="mt-10 grid sm:grid-cols-3 gap-6">
@@ -98,7 +113,7 @@ export default function AboutPage() {
                 <div className="space-y-4 text-xs text-slate-300">
                   <div className="flex justify-between">
                     <span>Core stack</span>
-                    <span className="font-medium text-white">Next.js · React · Node</span>
+                    <span className="font-medium text-white">Next.js · NestJS · Express · React · Node</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Specialties</span>
@@ -106,7 +121,7 @@ export default function AboutPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>Engagement</span>
-                    <span className="font-medium text-white">End-to-end delivery</span>
+                    <span className="font-medium text-white">Fixed-price (scope-dependent)</span>
                   </div>
                 </div>
 
@@ -155,4 +170,5 @@ export default function AboutPage() {
     </AppShell>
   )
 }
+
 
