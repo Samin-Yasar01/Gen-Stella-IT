@@ -2,24 +2,7 @@
 
 import { motion } from 'framer-motion'
 import AppShell from '@/components/layout/AppShell'
-
-const services = [
-  {
-    title: 'Web applications',
-    description: 'High-performance web apps built on modern stacks like Next.js, React, and TypeScript.',
-    points: ['Design systems & UI libraries', 'Dashboard & internal tooling', 'Multi-tenant SaaS platforms'],
-  },
-  {
-    title: 'Mobile & cross‑platform',
-    description: 'Reach users everywhere with responsive web, PWA, and cross-platform experiences.',
-    points: ['Responsive-first design', 'PWA & offline support', 'API-driven mobile architectures'],
-  },
-  {
-    title: 'Cloud & DevOps',
-    description: 'Resilient infrastructure designed for teams that ship continuously.',
-    points: ['CI/CD pipelines', 'Observability & monitoring', 'Scalable cloud-native setups'],
-  },
-]
+import { ServicesSection } from '@/components/sections/services'
 
 const processSteps = [
   { label: '01 · Discover', description: 'Clarify goals, risks, and constraints. Align on what success looks like.' },
@@ -57,35 +40,7 @@ export default function ServicesPage() {
             </p>
           </motion.div>
 
-          <div className="mt-16 grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="relative p-[1px] rounded-3xl overflow-hidden bg-gradient-to-br from-slate-200 via-blue-200 to-purple-200 dark:from-slate-800 dark:via-slate-900 dark:to-slate-900"
-              >
-                <div className="h-full rounded-[22px] bg-white dark:bg-slate-950 px-6 py-8 flex flex-col gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-semibold">
-                    {index + 1}
-                  </div>
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{service.title}</h2>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{service.description}</p>
-                  <ul className="mt-2 space-y-1.5 text-sm text-gray-600 dark:text-gray-400">
-                    {service.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2">
-                        <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-blue-500" />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <ServicesSection />
 
           {/* Process */}
           <motion.div
