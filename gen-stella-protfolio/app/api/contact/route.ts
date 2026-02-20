@@ -65,7 +65,10 @@ export async function POST(req: Request) {
           </div>
 
           <div style="background:#ffffff; padding:20px; border-radius:12px; margin-top:16px; border:1px solid #eef2ff;">
-            <h3 style="margin:0 0 12px; color:#0f172a; font-size:16px">${safeSubject}</h3>
+            <div style="margin-bottom:12px;">
+              <span style="color:#64748b; font-size:13px;">Plan:</span>
+              <span style="margin-left:8px; font-weight:700; color:#0f172a">${safeSubject}</span>
+            </div>
 
             <table role="presentation" style="width:100%; border-collapse:collapse; margin-bottom:14px;">
               <tr>
@@ -77,6 +80,8 @@ export async function POST(req: Request) {
                 <td style="padding:4px 0; color:#0f172a">${safeEmail}</td>
               </tr>
             </table>
+
+            <div style="margin-bottom:8px; color:#64748b; font-size:13px;">message:</div>
 
             <div style="background:#f8fafc; padding:14px; border-radius:8px; color:#0f172a; line-height:1.5; font-size:14px;">
               ${safeMessageHtml}
@@ -95,7 +100,7 @@ export async function POST(req: Request) {
       to: process.env.EMAIL_USER,
       replyTo: email,
       subject: safeSubject,
-      text: `Name: ${name}\nEmail: ${email}\n\n${safeMessageText}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nPlan: ${safeSubject}\n\nmessage:\n${safeMessageText}`,
       html: htmlBody,
     }
 

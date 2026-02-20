@@ -18,10 +18,14 @@ export default function ContactPage() {
     setStatus('sending')
 
     try {
+      // ensure we capture the latest editor content (in case state hasn't flushed yet)
+      const editorEl = document.querySelector('[data-rich-text-editor]') as HTMLElement | null
+      const messageToSend = message || editorEl?.innerHTML || ''
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject, message }),
+        body: JSON.stringify({ name, email, subject, message: messageToSend }),
       })
 
       if (res.ok) {
@@ -150,7 +154,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">Email</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">sheaikh.rahman@northsouth.edu</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">genstellait@gmail.com</p>
                 </div>
               </div>
 
@@ -170,7 +174,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">Response time</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">Within 1–2 business days</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Within 24 hours</p>
                 </div>
               </div>
             </motion.aside>
