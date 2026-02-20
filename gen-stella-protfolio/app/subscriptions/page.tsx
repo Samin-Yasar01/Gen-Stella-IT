@@ -18,23 +18,27 @@ import AppShell from '@/components/layout/AppShell'
 const plans = [
   {
     name: 'Starter',
-    price: '$499',
-    cadence: 'per project',
+    bdPrice: '৳29,000',
+    usdPrice: '$250',
+    cadence: 'One-time',
+    strategy: 'Competitive entry',
     highlight: 'For landing pages & small sites.',
     features: ['Single-page or simple site', 'Basic animations & theming', '1 week of post-launch support'],
   },
   {
     name: 'Growth',
-    price: '$2.4k',
-    cadence: 'per month',
+    bdPrice: '৳1,15,000',
+    usdPrice: '$950',
+    cadence: 'Monthly',
+    strategy: 'High-value retainer',
     highlight: 'For product teams shipping every week.',
     featured: true, // This triggers the glowing border
     features: ['Ongoing feature work', 'Priority bug fixes', 'Design & implementation reviews', 'Dedicated Slack channel'],
   },
   {
     name: 'Dedicated',
-    price: 'Custom',
-    cadence: 'bespoke pricing',
+    cadence: 'Monthly',
+    strategy: 'Enterprise squad',
     highlight: 'For companies who want a long-term partner.',
     features: ['Embedded squad', 'Custom SLAs & coverage', 'Architecture & roadmap guidance', 'Unlimited revisions'],
   },
@@ -58,10 +62,17 @@ export default function SubscriptionsPage() {
     if (!selectedPlan) return
     setStatus('sending')
     try {
+      // include the selected plan as a bolded heading in the HTML message
+      // if `message` state is empty (due to contentEditable timing), read DOM fallback
+      const editorEl = document.querySelector('[data-rich-text-editor]') as HTMLElement | null
+      const editorContent = editorEl?.innerHTML || ''
+      const contentHtml = editorContent || message
+      const messageHtml = `<div><strong>Plan: ${selectedPlan}</strong><br/><br/>${contentHtml}</div>`
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject: `${selectedPlan} plan inquiry`, message: `Plan: ${selectedPlan}\n\n${message}` }),
+        body: JSON.stringify({ name, email, subject: `${selectedPlan} plan inquiry`, message: messageHtml }),
       })
       if (res.ok) {
         setStatus('success')
@@ -147,10 +158,25 @@ export default function SubscriptionsPage() {
                     </p>
                   </div>
 
-                  <div className="mb-8 flex items-baseline gap-1">
-                    <span className="text-5xl font-extrabold">{plan.price}</span>
-                    <span className="text-sm opacity-60">/{plan.cadence}</span>
-                  </div>
+                  { (plan.bdPrice || plan.usdPrice) ? (
+                    <div className="mb-6">
+                      <div className="flex items-baseline gap-3">
+                        {plan.bdPrice && <span className="text-3xl font-extrabold">{plan.bdPrice}</span>}
+                        {plan.bdPrice && <span className="text-sm opacity-60">BDT</span>}
+                      </div>
+                      <div className="flex items-baseline gap-3 mt-1">
+                        {plan.usdPrice && <span className="text-2xl font-semibold">{plan.usdPrice}</span>}
+                        {plan.usdPrice && <span className="text-sm opacity-60">USD</span>}
+                        <span className="text-sm opacity-60 ml-3">{plan.cadence}</span>
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-slate-400 mt-3">{plan.strategy}</div>
+                    </div>
+                  ) : (
+                    <div className="mb-6">
+                      <div className="text-sm text-gray-500 dark:text-slate-400">{plan.cadence}</div>
+                      <div className="text-sm text-gray-500 dark:text-slate-400 mt-2">{plan.strategy}</div>
+                    </div>
+                  )}
 
                   <ul className="space-y-4 mb-10 flex-grow">
                     {plan.features.map((feature) => (
