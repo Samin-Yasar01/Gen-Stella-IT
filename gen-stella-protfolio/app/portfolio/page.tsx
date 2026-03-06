@@ -5,25 +5,25 @@ import AppShell from '@/components/layout/AppShell'
 
 const projects = [
   {
-    title: 'Nebula Analytics Dashboard',
-    description: 'A modular analytics cockpit for SaaS teams with real-time insights and custom reporting.',
-    image:
-      'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80',
-    tags: ['Next.js', 'Tailwind', 'Postgres'],
+    title: 'NovaChrono',
+    description: 'Luxury watch e-commerce platform featuring a curated collection of premium timepieces. Elegant dark-themed design with precision engineering aesthetics.',
+    image: '/portfolioImages/NovaChrono.jpeg',
+    tags: ['Next.js', 'E-commerce', 'Tailwind CSS'],
+    link: 'https://nova-chrono.vercel.app/',
   },
   {
-    title: 'Orbit Launch Marketing Site',
-    description: 'Conversion-optimized launch site for a developer tooling product, built for rapid iteration.',
-    image:
-      'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80',
-    tags: ['React', 'Framer Motion', 'CMS'],
+    title: 'Inventory Management',
+    description: 'Comprehensive inventory management system for tracking and optimizing stock levels, orders, and deliveries.',
+    image: '/portfolioImages/InventoryManagement.jpeg',
+    tags: ['Next.js', 'Inventory', 'Tailwind CSS'],
+    link: 'https://niloyinventory.vercel.app/',
   },
   {
-    title: 'StellaOps Platform',
-    description: 'Internal tooling suite that streamlines deployments, observability, and feature rollouts.',
-    image:
-      'https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80',
-    tags: ['Node.js', 'Kubernetes', 'Design System'],
+    title: 'What To Cook',
+    description: 'Recipe discovery platform that helps users find and organize recipes based on available ingredients and dietary preferences.',
+    image: '/portfolioImages/WhatToCook.jpeg',
+    tags: ['Next.js', 'Recipes', 'Tailwind CSS'],
+    link: 'https://whattocook-niloy.vercel.app/',
   },
 ]
 
@@ -56,40 +56,68 @@ export default function PortfolioPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.article
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.01 }}
-                className="group rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden bg-white/70 dark:bg-slate-950/70 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-300"
-              >
-                <div className="relative overflow-hidden h-52">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/0 to-transparent opacity-80" />
-                </div>
-                <div className="p-6 flex flex-col gap-3">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{project.title}</h2>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            {projects.map((project, index) => {
+              const CardContent = (
+                <>
+                  <div className="relative overflow-hidden h-52">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/0 to-transparent opacity-80" />
                   </div>
-                </div>
-              </motion.article>
-            ))}
+                  <div className="p-6 flex flex-col gap-3">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{project.title}</h2>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    {project.link && (
+                      <span className="mt-2 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:underline">
+                        View Project →
+                      </span>
+                    )}
+                  </div>
+                </>
+              )
+
+              return project.link ? (
+                <motion.a
+                  key={project.title}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  className="group rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden bg-white/70 dark:bg-slate-950/70 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  {CardContent}
+                </motion.a>
+              ) : (
+                <motion.article
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  className="group rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden bg-white/70 dark:bg-slate-950/70 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-300"
+                >
+                  {CardContent}
+                </motion.article>
+              )
+            })}
           </div>
         </div>
       </section>

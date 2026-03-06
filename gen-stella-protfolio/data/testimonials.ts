@@ -16,13 +16,22 @@ export interface Testimonial {
 }
 
 export const testimonials: Testimonial[] = [
-  // {
-  //   id: "1",
-  //   quote: "Amazing service and great results!",
-  //   author: "Client Name",
-  //   title: "CEO",
-  //   company: "Company Name",
-  //   image: "/images/testimonials/client.jpg",
-  //   rating: 5,
-  // },
+  {
+    id: 't1',
+    quote: 'Gen Stella transformed our idea into a production-grade product — on time and on budget.',
+    author: 'R. Patel',
+    title: 'CEO',
+    company: 'Acme Corp',
+    image: '',
+    rating: 5,
+  },
+  {
+    id: 't2',
+    quote: 'Fast, communicative, and pragmatic — the team became an extension of ours.',
+    author: 'L. Mendes',
+    title: 'Head of Product',
+    company: 'BrightApps',
+    image: '',
+    rating: 5,
+  },
 ];
