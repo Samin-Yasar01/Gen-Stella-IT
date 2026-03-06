@@ -8,9 +8,12 @@ const _geist = Geist({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Gen Stella IT - Software Development Company',
+  description: 'Professional software development and IT solutions | Gen Stella IT',
+  generator: 'Gen Stella IT',
+  icons: {
+    icon: '/logo/GenStellaIT.jpeg',
+  },
 }
 
 export default function RootLayout({
